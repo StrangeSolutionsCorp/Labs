@@ -19,14 +19,20 @@ int main()
 	char *src;
 	int i;
 
-	in = fopen("IN.txt", "r");
+
 	out = fopen("OUT.txt", "w");
-	while (feof(in)==0)
+	if ((in = fopen("IN.txt", "r")) == NULL)
+	{
+		fprintf(out, "File was not existed\n");
+			return 0;
+	}
+
+	while (feof(in) == 0)
 	{
 
 		if (fgets(line, MAXLINE, in) == NULL)
 		{
-			fprintf(out,"File was Empty\n");
+			fprintf(out, "File was Empty\n");
 			return 0;
 		}
 		ptr = line;
@@ -38,9 +44,9 @@ int main()
 		do
 		{
 			c = *ptr; // взять текущий символ из буфера 
-			if (c == ' ' || c == '.' || c == ',' || c == '\n' || c == '\0') // найден разделитель 
+			if ((c == '.')|| (c == ',') || (c == ' ') || (c == '\n') || (c == '\0') || (c == '\t')) // найден разделитель 
 			{
-				if ((len % 2 == 0) && (word == YES)) // длина больше нужной и это именно слово
+				if ((len % 2 == 0) && (word == YES)) // длина чётная и это именно слово
 				{
 					end = ptr - 1; // запомнить указатель на конец слова 
 					src = end + 1;
@@ -54,7 +60,7 @@ int main()
 			}
 			else // найдена буква 
 			{
-				if ((c >= '0') && (c <= '9')) // если цифра
+				if (((c < 'a') || (c > 'z')) && ((c < 'A') || (c > 'Z'))) // если не буква
 					word = NO; // это не слово
 				if (flag == NO)
 				{
