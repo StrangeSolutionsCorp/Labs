@@ -21,11 +21,11 @@ int main()
 
 	if ((out = fopen("OUT.txt", "w")) == NULL)
 	{
-		printf("File creating was broken\n");
+		printf("File creating was brokeт\n");
 		system("pause");
 		return 0;
 	}
-	if ((in = fopen("IN.txt", "r")) == NULL)
+	if ((in = fopen("IN.txt", "r+")) == NULL)
 	{
 		fprintf(out, "File was not existed\n");
 			return 0;
@@ -72,10 +72,9 @@ int main()
 					word = YES;
 				}
 				flag = YES;
-				len++;
+				len++; // увеличить длину слов
 			}
 			ptr++; // продвинуть вперёд указатель на текущий символ 
-			 // увеличить длину слова 
 		} while (c != '\0');
 		fputs(line, out);
 	}
