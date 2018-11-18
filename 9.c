@@ -19,8 +19,12 @@ int main()
 	char *src;
 	int i;
 
-
-	out = fopen("OUT.txt", "w");
+	if ((out = fopen("OUT.txt", "w")) == NULL)
+	{
+		printf("File creating was broken\n");
+		system("pause");
+		return 0;
+	}
 	if ((in = fopen("IN.txt", "r")) == NULL)
 	{
 		fprintf(out, "File was not existed\n");
@@ -44,7 +48,7 @@ int main()
 		do
 		{
 			c = *ptr; // взять текущий символ из буфера 
-			if ((c == '.')|| (c == ',') || (c == ' ') || (c == '\n') || (c == '\0') || (c == '\t')) // найден разделитель 
+			if ((c == '.')|| (c == ',') || (c == ' ') || (c == '\n') || (c == '\0') || (c == '\t') || (c == '?') || (c == '!')) // найден разделитель 
 			{
 				if ((len % 2 == 0) && (word == YES)) // длина чётная и это именно слово
 				{
