@@ -33,8 +33,9 @@ int main()
 
 	while (feof(in) == 0)
 	{
-
-		if (fgets(line, MAXLINE, in) == NULL)
+		fgets(line, MAXLINE, in);
+		c = line[0];
+		if (c == '\0')
 		{
 			fprintf(out, "File was Empty\n");
 			return 0;
