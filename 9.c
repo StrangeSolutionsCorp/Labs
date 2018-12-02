@@ -17,7 +17,8 @@ int main()
 	int word; // соответствие параметрам слова
 	char *dst;
 	char *src;
-	int i;
+	int flag1;
+
 
 	if ((out = fopen("OUT.txt", "w")) == NULL)
 	{
@@ -28,14 +29,15 @@ int main()
 	if ((in = fopen("IN.txt", "r+")) == NULL)
 	{
 		fprintf(out, "File was not existed\n");
-			return 0;
+		return 0;
 	}
+
+	flag1 = 0;
 
 	while (feof(in) == 0)
 	{
 		fgets(line, MAXLINE, in);
-		c = line[0];
-		if (c == '\0')
+		if (line[0] == -52)
 		{
 			fprintf(out, "File was Empty\n");
 			return 0;
@@ -49,7 +51,9 @@ int main()
 		do
 		{
 			c = *ptr; // взять текущий символ из буфера 
-			if ((c == '.')|| (c == ',') || (c == ' ') || (c == '\n') || (c == '\0') || (c == '\t') || (c == '?') || (c == '!')) // найден разделитель 
+			if ((c >= 33) && (c <= 127))
+				flag1 = 1;
+			if ((c == '.') || (c == ',') || (c == ' ') || (c == '\n') || (c == '\0') || (c == '\t') || (c == '?') || (c == '!')) // найден разделитель 
 			{
 				if ((len % 2 == 0) && (word == YES)) // длина чётная и это именно слово
 				{
@@ -78,6 +82,21 @@ int main()
 			ptr++; // продвинуть вперёд указатель на текущий символ 
 		} while (c != '\0');
 		fputs(line, out);
+	}
+	if (flag1 == 0)
+	{
+		fclose(out);
+		if ((out = fopen("OUT.txt", "w")) == NULL)
+		{
+			printf("File creating was brokeт\n");
+			system("pause");
+			return 0;
+		}
+		fprintf(out, "File was empty\n");
+		printf("Fail!\n");
+		system("pause");
+
+		return 1;
 	}
 	return 0;
 }
