@@ -67,7 +67,7 @@ void main(void)
 		while (*ptr != 0)
 		{
 			c = *ptr;
-			if ((c == ' ') || (c == ';') || (c == ',') || (c == '.')||(c == '\n')||(c =='\t') || (c == '/') || (c == '*') || (c == '(') || (c == ')'))
+			if ((c == ' ') || (c == ';') || (c == ',') || (c == '.')||(c == '\n')||(c =='\t') || (c == '/') || (c == '*') || (c == '(') || (c == ')') || (c == '='))
 			{
 				flag = NO;
 				if (c == '/')
@@ -154,6 +154,14 @@ void main(void)
 				}
 				if (flagioni == YES)
 				{
+					if (word[0] != ' ')
+					{
+						foregroundColor = foregroundColor0;
+						textAttribute = foregroundColor;
+						SetConsoleTextAttribute(hStdout, textAttribute);
+						printf("%c", word[0]);
+						word[0] = ' ';
+					}
 					foregroundColor = foregroundColor1;
 					textAttribute = foregroundColor;
 					SetConsoleTextAttribute(hStdout, textAttribute);
