@@ -27,7 +27,6 @@ void main(void)
 	WORD foregroundColor;
 	WORD backgroundColor;
 	WORD textAttribute;
-	// Получить стандартный дескриптор
 	hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
 	foregroundColor0 = FOREGROUND_INTENSITY | 15;
 	foregroundColor1 = FOREGROUND_INTENSITY | 4;
@@ -112,23 +111,26 @@ void main(void)
 					}
 
 				}
-				if (flw == YES)
+				if (flagionio == NO)
 				{
-					strcpy(word1, word);
-					flw = NO;
-					fl2 = YES;
-					word1[i] = '\0';
+					if (flw == YES)
+					{
+						strcpy(word1, word);
+						flw = NO;
+						fl2 = YES;
+						word1[i] = '\0';
+					}
+					for (g = 0; g < 7; g++)
+						if (word[g] != word2[g])
+							l = NO;
+					if (l == YES)
+						flw = YES;
+					if (fl2 == YES)
+						if (((word[1] == '0') && (word[2] == 'x')) && (((word[3] >= '0') && (word[4] <= '9')) || ((word[4] >= 'a') && (word[4] <= 'z')) || ((word[4] >= 'A') && (word[4] <= 'Z'))) && (fl2 == YES))
+							flagprint = YES;
+						else
+							flagis = YES;
 				}
-				for (g = 0; g < 7; g++)
-					if (word[g] != word2[g])
-						l = NO;
-				if (l == YES)
-					flw = YES;
-				if (fl2 == YES)
-					if (((word[1] == '0') && (word[2] == 'x')) && (((word[3] >= '0') && (word[4] <= '9')) || ((word[4] >= 'a') && (word[4] <= 'z')) || ((word[4] >= 'A') && (word[4] <= 'Z'))) && (fl2 == YES))
-						flagprint = YES;
-					else
-						flagis = YES;
 			}
 			else
 			{
@@ -195,10 +197,9 @@ void main(void)
 					}
 				}
 				strcpy(word3, word);
-				i = 0; // начать новое слово
-
 				if (flagininio == NO)
 					flagionio = NO;
+				i = 0;
 			}
 			word[i] = c;
 			ptr++;
@@ -226,7 +227,7 @@ void main(void)
 				if (flagis == YES)
 				{
 					printf("%s", word1);
-					//printf("%s", word3);
+					printf("%s", word3);
 				}
 
 			}
@@ -237,7 +238,6 @@ void main(void)
 		}
 	}
 	printf("\n");
-	// белые символы, черный фон
 	SetConsoleTextAttribute(hStdout, 7);
 
 	system("pause");
