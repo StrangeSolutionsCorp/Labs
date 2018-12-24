@@ -18,7 +18,7 @@ void main(void)
 	char word3[MAXLEN];
 	char words[MAXLEN][MAXLEN];
 	char word2[] = "#define";
-	int i, l, g, w, a, com, m;
+	int i, l, g, w, a, com, m, perenos;
 	char c;
 	int prevfl, flag, flw, fl2, flagprint, flagis, flagioni, flagionio, flagininio;
 	char *ptr;
@@ -62,7 +62,7 @@ void main(void)
 		while (*ptr != 0)
 		{
 			c = *ptr;
-			if ((c == ' ') || (c == ';') || (c == ',') || (c == '.')||(c == '\n')||(c =='\t') || (c == '/') || (c == '*') || (c == '(') || (c == ')') || (c == '=') || (c == '+') || (c == '-') || (c == '<') || (c == '>'))
+			if ((c == ' ') || (c == ';') || (c == ',') || (c == '.')||(c == '\n')||(c =='\t') || (c == '/') || (c == '*') || (c == '(') || (c == ')') || (c == '=') || (c == '+') || (c == '-') || (c == '<') || (c == '>') || (c == '[') || (c == ']'))
 			{
 				flag = NO;
 				if (c == '/')
@@ -158,7 +158,17 @@ void main(void)
 						textAttribute = foregroundColor;
 						SetConsoleTextAttribute(hStdout, textAttribute);
 						printf("%c", word[0]);
-						word[0] = ' ';
+						if ((word[0] == '(') || (word[0] == '['))
+						{
+							perenos = 0;
+							while (word[perenos] != '\0')
+							{
+								word[perenos] = word[perenos + 1];
+								perenos++;
+							}
+						}
+						else
+							word[0] = ' ';
 					}
 					foregroundColor = foregroundColor1;
 					textAttribute = foregroundColor;
