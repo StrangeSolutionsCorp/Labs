@@ -3,7 +3,7 @@
 #include <string.h>
 #include <windows.h>
 #include <stdlib.h>
-#define YES 1 
+#define YES 1
 #define NO 0
 #define MAXLEN 1000
 
@@ -34,6 +34,7 @@ void main(void)
 	if ((in = fopen("IN.txt", "r+")) == NULL)
 	{
 		fprintf(stdout, "File was not existed\n");
+		system("pause");
 		return 0;
 	}
 	w = 0;
@@ -54,11 +55,6 @@ void main(void)
 		flagionio = NO;
 		flagis = NO;
 		l = YES;
-		if (com == 1)
-		{
-			com = 0;
-			flagininio = NO;
-		}
 		word[0] = '\0';
 		word1[0] = '\0';
 		flw = fl2 = NO;
@@ -227,7 +223,7 @@ void main(void)
 				if (flagis == YES)
 				{
 					printf("%s", word1);
-					printf("%s", word3);
+					//printf("%s", word3);
 				}
 
 			}
